@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -19,6 +22,7 @@ class User extends Authenticatable
         'role',
         'current_tier',
         'is_active',
+        'email_verified_at',
     ];
 
     protected $hidden = [
@@ -35,18 +39,68 @@ class User extends Authenticatable
         ];
     }
 
-    // Relationship to granular PBAC permissions
-    public function permissions()
+    public function permissions(): BelongsToMany
     {
         return $this->belongsToMany(Permission::class, 'user_permissions')
-                    ->withPivot('granted_at')
-                    ->withTimestamps();
+            ->using(UserPermission::class)
+            ->withPivot('granted_at')
+            ->withTimestamps();
     }
 
-    // Helper to check access rights
+    public function authoredDailyLessonLogs(): HasMany
+    {
+        return $this->hasMany(DailyLessonLog::class, 'author_id');
+    }
+
+    public function reviewedDailyLessonLogs(): HasMany
+    {
+        return $this->hasMany(DailyLessonLog::class, 'reviewer_id');
+    }
+
+    public function cotRatings(): HasMany
+    {
+        return $this->hasMany(CotRating::class, 'teacher_id');
+    }
+
+    public function professionalGrowthEntries(): HasMany
+    {
+        return $this->hasMany(ProfessionalGrowth::class, 'teacher_id');
+    }
+
+    public function incidentReports(): HasMany
+    {
+        return $this->hasMany(IncidentReport::class, 'teacher_id');
+    }
+
+    public function counselingInterventions(): HasMany
+    {
+        return $this->hasMany(CounselingIntervention::class, 'counselor_id');
+    }
+
+    public function assetAssignments(): HasMany
+    {
+        return $this->hasMany(AssetAssignment::class);
+    }
+
+    public function getNameAttribute(): string
+    {
+        return trim($this->first_name.' '.$this->last_name);
+    }
+
+    public function setNameAttribute(string $value): void
+    {
+        $parts = preg_split('/\s+/', trim($value), 2) ?: [];
+        $this->attributes['first_name'] = $parts[0] ?? '';
+        $this->attributes['last_name'] = $parts[1] ?? $parts[0] ?? '';
+    }
+
+    public function initials(): string
+    {
+        return Str::upper(Str::substr($this->first_name, 0, 1).Str::substr($this->last_name, 0, 1));
+    }
+
     public function hasPermissionTo(string $actionName): bool
     {
-        // Admins bypass granular checks and can do everything
         if ($this->role === 'admin') {
             return true;
         }

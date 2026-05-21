@@ -1,0 +1,2 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Good Moral Certificate</title></head><body style="font-family: Arial, sans-serif; padding: 48px;"><h1>Certificate of Good Moral Character</h1><p>This certifies that <strong>{{ $student->full_name ?: $student->lrn }}</strong> has no unresolved major behavioral incidents on record as of {{ now()->format('F d, Y') }}.</p><p>Learner Reference Number: {{ $student->lrn }}</p><p>Issued by the Guidance Office.</p></body></html>

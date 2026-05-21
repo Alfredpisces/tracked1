@@ -1,112 +1,34 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Manage Personnel & PBAC') }}
-            </h2>
-            <button
-                class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                + New Account
-            </button>
-        </div>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-
-                    <div class="mb-6">
-                        <h3 class="text-lg font-bold text-gray-800">System Users Directory</h3>
-                        <p class="text-sm text-gray-600">Assign specific functional permissions to personnel to control
-                            their dashboard modules.</p>
-                    </div>
-
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Name / Email</th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Base Role</th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Active PBAC Permissions</th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Status</th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-gray-900">Roberto Aquino</div>
-                                        <div class="text-sm text-gray-500">schoolhead@deped.edu.ph</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">School
-                                            Head</span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex flex-wrap gap-1">
-                                            <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">Approve
-                                                DLL</span>
-                                            <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">Encode
-                                                COT</span>
-                                            <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">Generate
-                                                Rankings</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit
-                                            Permissions</a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-gray-900">Grace Custodio</div>
-                                        <div class="text-sm text-gray-500">counselor@deped.edu.ph</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Counselor</span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex flex-wrap gap-1">
-                                            <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">Resolve
-                                                Cases</span>
-                                            <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">Issue Good
-                                                Moral</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit
-                                            Permissions</a>
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
+    <x-slot name="header"><h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Manage Personnel & PBAC') }}</h2></x-slot>
+    <div class="space-y-6">
+        <div class="bg-white shadow-sm rounded-lg p-6">
+            <h3 class="font-bold text-gray-900 mb-4">Create Personnel Account</h3>
+            <form action="{{ route('admin.personnel.store') }}" method="POST" class="space-y-4">
+                @csrf
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                    <input name="employee_id" value="{{ old('employee_id') }}" placeholder="Employee ID" class="rounded-md border-gray-300 shadow-sm" required>
+                    <input name="first_name" value="{{ old('first_name') }}" placeholder="First Name" class="rounded-md border-gray-300 shadow-sm" required>
+                    <input name="last_name" value="{{ old('last_name') }}" placeholder="Last Name" class="rounded-md border-gray-300 shadow-sm" required>
+                    <input name="email" type="email" value="{{ old('email') }}" placeholder="Email" class="rounded-md border-gray-300 shadow-sm" required>
+                    <select name="role" class="rounded-md border-gray-300 shadow-sm"><option value="teacher">Teacher</option><option value="counselor">Counselor</option><option value="school_head">School Head</option><option value="admin">Admin</option></select>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-700 mb-2">PBAC Permissions</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
+                        @foreach ($permissions as $permission)
+                            <label class="inline-flex items-center gap-2"><input type="checkbox" name="permissions[]" value="{{ $permission->id }}">{{ $permission->action_name }}</label>
+                        @endforeach
                     </div>
                 </div>
-            </div>
+                <label class="inline-flex items-center gap-2 text-sm"><input type="checkbox" name="is_active" value="1" checked> Active</label>
+                <div><button type="submit" class="inline-flex rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white">Create Account</button></div>
+            </form>
+        </div>
+        <div class="bg-white shadow-sm rounded-lg overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50"><tr><th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Personnel</th><th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Role</th><th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Permissions</th><th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th></tr></thead>
+                <tbody class="divide-y divide-gray-200 bg-white">@foreach($users as $person)<tr><td class="px-6 py-4 text-sm text-gray-900">{{ $person->name }}<div class="text-xs text-gray-500">{{ $person->email }}</div></td><td class="px-6 py-4 text-sm uppercase">{{ $person->role }}</td><td class="px-6 py-4 text-xs text-gray-600">{{ $person->permissions->pluck('action_name')->implode(', ') ?: 'No granular permissions assigned' }}</td><td class="px-6 py-4 text-sm">{{ $person->is_active ? 'Active' : 'Inactive' }}</td></tr>@endforeach</tbody>
+            </table>
         </div>
     </div>
 </x-app-layout>
