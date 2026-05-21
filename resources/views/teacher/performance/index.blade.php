@@ -3,8 +3,8 @@
     <div class="space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="bg-white shadow-sm rounded-lg p-6"><p class="text-sm text-gray-500">DLL Compliance Rate</p><p class="text-3xl font-semibold text-gray-900">{{ $stats['dll_compliance_rate'] }}%</p></div>
-            <div class="bg-white shadow-sm rounded-lg p-6"><p class="text-sm text-gray-500">Average COT Score</p><p class="text-3xl font-semibold text-gray-900">{{ number_format($stats['average_cot_score'], 2) }}</p></div>
-            <div class="bg-white shadow-sm rounded-lg p-6"><p class="text-sm text-gray-500">Professional Growth Points</p><p class="text-3xl font-semibold text-gray-900">{{ number_format($stats['professional_growth_points'], 2) }}</p></div>
+            <div class="bg-white shadow-sm rounded-lg p-6"><p class="text-sm text-gray-500">Average COT Score</p><p class="text-3xl font-semibold text-gray-900">{{ number_format((float) ($stats['average_cot_score'] ?? 0), 2) }}</p></div>
+            <div class="bg-white shadow-sm rounded-lg p-6"><p class="text-sm text-gray-500">Professional Growth Points</p><p class="text-3xl font-semibold text-gray-900">{{ number_format((float) ($stats['professional_growth_points'] ?? 0), 2) }}</p></div>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div class="bg-white shadow-sm rounded-lg p-6"><h3 class="font-bold text-gray-900 mb-4">COT Ratings</h3><ul class="space-y-3">@forelse($cotRatings as $rating)<li class="text-sm text-gray-700">{{ $rating->rating_date?->format('M d, Y') }} — {{ number_format((float) $rating->score, 2) }} / 5.00</li>@empty<li class="text-sm text-gray-500">No COT ratings available yet.</li>@endforelse</ul></div>

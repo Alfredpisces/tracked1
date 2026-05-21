@@ -62,9 +62,11 @@ class DllPrecheckerClient
 
         $passed = $missing === [];
 
+        $requiredCount = max(1, count($required));
+
         return [
             'passed' => $passed,
-            'score' => $passed ? 1.0 : max(0.2, 1 - (count($missing) / count($required))),
+            'score' => $passed ? 1.0 : max(0.2, 1 - (count($missing) / $requiredCount)),
             'provider' => 'local-fallback',
             'feedback' => $passed
                 ? ['DLL draft is complete enough to submit for review.']

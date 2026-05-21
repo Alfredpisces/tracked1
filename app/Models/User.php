@@ -89,7 +89,13 @@ class User extends Authenticatable
 
     public function setNameAttribute(string $value): void
     {
-        $parts = preg_split('/\s+/', trim($value), 2) ?: [];
+        $trimmed = trim($value);
+
+        if ($trimmed === '') {
+            return;
+        }
+
+        $parts = preg_split('/\s+/', $trimmed, 2) ?: [];
         $this->attributes['first_name'] = $parts[0] ?? '';
         $this->attributes['last_name'] = $parts[1] ?? $parts[0] ?? '';
     }

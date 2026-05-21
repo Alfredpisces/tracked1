@@ -1,0 +1,55 @@
+openapi: 3.1.0
+info:
+  title: TrackEd Internal Contracts
+  version: 1.0.0
+paths:
+  /teacher/dll/precheck:
+    post:
+      summary: Run DLL AI precheck
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DailyLessonLogDraft'
+      responses:
+        '200':
+          description: Precheck result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrecheckResult'
+components:
+  schemas:
+    DailyLessonLogDraft:
+      type: object
+      properties:
+        subject:
+          type: string
+        target_date:
+          type: string
+          format: date
+        objectives:
+          type: string
+        content:
+          type: string
+        learning_resources:
+          type: string
+        procedures:
+          type: string
+        reflection:
+          type: string
+      required: [subject, target_date]
+    PrecheckResult:
+      type: object
+      properties:
+        passed:
+          type: boolean
+        score:
+          type: number
+        provider:
+          type: string
+        feedback:
+          type: array
+          items:
+            type: string
