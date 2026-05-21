@@ -18,7 +18,7 @@
     x-data="{
         sidebarOpen: false,
         focusSidebarStart() {
-            const firstLink = document.querySelector('#mobile-sidebar [data-focus-target]');
+            const firstLink = this.$refs.sidebar?.querySelector('[data-focus-target]');
             if (firstLink) {
                 firstLink.focus();
                 return;
@@ -34,7 +34,7 @@
 
         <aside id="mobile-sidebar"
             class="fixed inset-y-0 left-0 z-50 w-72 border-r border-gray-200 bg-white shadow-lg transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0 lg:shadow-none"
-            :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" role="navigation"
+            :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" role="navigation" x-ref="sidebar"
             aria-label="Primary navigation">
             @include('layouts.navigation')
         </aside>
