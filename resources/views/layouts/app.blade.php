@@ -31,8 +31,8 @@
                     <div class="flex items-center gap-3">
                         <button type="button"
                             class="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 lg:hidden"
-                            @click="sidebarOpen = true; $nextTick(() => document.getElementById('mobile-sidebar')?.focus())"
-                            aria-controls="mobile-sidebar" :aria-expanded="sidebarOpen.toString()"
+                            @click="sidebarOpen = true; $nextTick(() => document.querySelector('#mobile-sidebar a')?.focus())"
+                            aria-controls="mobile-sidebar" :aria-expanded="sidebarOpen"
                             aria-label="Open navigation menu">
                             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
