@@ -1,4 +1,5 @@
 <nav class="flex h-full flex-col">
+    <h2 id="sidebar-navigation-heading" class="sr-only" tabindex="-1">Primary navigation menu</h2>
     <div class="flex h-16 shrink-0 items-center border-b border-gray-200 px-5">
         <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
             <div class="flex h-9 w-9 items-center justify-center rounded-md bg-indigo-600 text-sm font-bold text-white">

@@ -24,7 +24,7 @@
                 return;
             }
 
-            document.getElementById('mobile-sidebar')?.focus();
+            document.getElementById('sidebar-navigation-heading')?.focus();
         }
     }"
     @keydown.escape.window="sidebarOpen = false">
@@ -35,7 +35,7 @@
         <aside id="mobile-sidebar"
             class="fixed inset-y-0 left-0 z-50 w-72 border-r border-gray-200 bg-white shadow-lg transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0 lg:shadow-none"
             :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" tabindex="-1"
-            :role="sidebarOpen ? 'dialog' : null" :aria-modal="sidebarOpen ? 'true' : null"
+            :role="sidebarOpen ? 'dialog' : null" :aria-modal="sidebarOpen ? 'true' : 'false'"
             aria-label="Primary navigation">
             @include('layouts.navigation')
         </aside>
