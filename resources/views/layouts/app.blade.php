@@ -21,7 +21,7 @@
 
         <aside id="mobile-sidebar"
             class="fixed inset-y-0 left-0 z-50 w-72 border-r border-gray-200 bg-white shadow-lg transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0 lg:shadow-none"
-            :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" tabindex="-1">
+            :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" tabindex="-1" aria-label="Primary navigation">
             @include('layouts.navigation')
         </aside>
 
@@ -31,7 +31,7 @@
                     <div class="flex items-center gap-3">
                         <button type="button"
                             class="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 lg:hidden"
-                            @click="sidebarOpen = true; $nextTick(() => document.getElementById('primary-sidebar-link')?.focus())"
+                            @click="sidebarOpen = true; $nextTick(() => { const firstLink = document.getElementById('primary-sidebar-link'); if (firstLink) { firstLink.focus(); return; } document.getElementById('mobile-sidebar')?.focus(); })"
                             aria-controls="mobile-sidebar" :aria-expanded="sidebarOpen"
                             aria-label="Open navigation menu">
                             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
