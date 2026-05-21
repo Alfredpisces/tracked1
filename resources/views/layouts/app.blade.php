@@ -34,8 +34,7 @@
 
         <aside id="mobile-sidebar"
             class="fixed inset-y-0 left-0 z-50 w-72 border-r border-gray-200 bg-white shadow-lg transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0 lg:shadow-none"
-            :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" tabindex="-1"
-            :role="sidebarOpen ? 'dialog' : null" :aria-modal="sidebarOpen ? 'true' : 'false'"
+            :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" role="navigation"
             aria-label="Primary navigation">
             @include('layouts.navigation')
         </aside>
