@@ -13,7 +13,7 @@
                 <tr>
                     <td class="px-6 py-4 text-sm text-gray-900">{{ $dailyLessonLog->target_date?->format('M d, Y') }}</td>
                     <td class="px-6 py-4 text-sm text-gray-600">{{ $dailyLessonLog->subject }}</td>
-                    <td class="px-6 py-4 text-sm">{{ $dailyLessonLog->is_ai_passed ? 'Passed' : 'Pending' }}</td>
+                    <td class="px-6 py-4 text-sm">{{ $dailyLessonLog->is_ai_passed ? 'Passed' : 'Needs Review' }}</td>
                     <td class="px-6 py-4 text-sm capitalize">{{ str_replace('_', ' ', $dailyLessonLog->status) }}</td>
                     <td class="px-6 py-4 text-sm space-x-3"><a href="{{ route('teacher.dll.show', $dailyLessonLog) }}" class="text-indigo-600">View</a><a href="{{ route('teacher.dll.edit', $dailyLessonLog) }}" class="text-indigo-600">Edit</a></td>
                 </tr>

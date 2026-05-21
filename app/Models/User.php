@@ -97,7 +97,7 @@ class User extends Authenticatable
 
         $parts = preg_split('/\s+/', $trimmed, 2) ?: [];
         $this->attributes['first_name'] = $parts[0] ?? '';
-        $this->attributes['last_name'] = $parts[1] ?? $parts[0] ?? '';
+        $this->attributes['last_name'] = $parts[1] ?? '';
     }
 
     public function initials(): string

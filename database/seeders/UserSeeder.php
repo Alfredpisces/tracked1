@@ -105,7 +105,7 @@ class UserSeeder extends Seeder
             'points' => 10,
             'verification_status' => 'verified',
             'verified_by' => $schoolHead->id,
-            'verified_at' => now()->subMonth(),
+            'verified_at' => now()->subMonths(1),
         ]);
 
         CotRating::updateOrCreate([

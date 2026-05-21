@@ -1,4 +1,4 @@
-const DB_NAME = 'tracked1-offline';
+const DB_NAME = 'tracked-offline';
 const DB_VERSION = 1;
 
 async function openDb() {
