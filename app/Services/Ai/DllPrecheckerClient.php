@@ -7,6 +7,8 @@ use Throwable;
 
 class DllPrecheckerClient
 {
+    private const MIN_FALLBACK_SCORE = 0.2;
+
     public function precheck(array $payload): array
     {
         $external = $this->callExternalService($payload);
@@ -66,7 +68,7 @@ class DllPrecheckerClient
 
         return [
             'passed' => $passed,
-            'score' => $passed ? 1.0 : max(0.2, 1 - (count($missing) / $requiredCount)),
+            'score' => $passed ? 1.0 : max(self::MIN_FALLBACK_SCORE, 1 - (count($missing) / $requiredCount)),
             'provider' => 'local-fallback',
             'feedback' => $passed
                 ? ['DLL draft is complete enough to submit for review.']

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tracked1-shell-v1';
+const CACHE_NAME = 'tracked-shell-v1';
 const OFFLINE_URLS = ['/', '/login'];
 
 self.addEventListener('install', (event) => {

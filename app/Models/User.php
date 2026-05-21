@@ -87,6 +87,9 @@ class User extends Authenticatable
         return trim($this->first_name.' '.$this->last_name);
     }
 
+    /**
+     * Accepts a best-effort 'First Last' string and splits only on the first whitespace boundary.
+     */
     public function setNameAttribute(string $value): void
     {
         $trimmed = trim($value);
