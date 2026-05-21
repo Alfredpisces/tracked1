@@ -13,6 +13,7 @@
     <div class="flex-1 overflow-y-auto px-3 py-4">
         <div class="space-y-1">
             <a href="{{ route('dashboard') }}"
+                id="primary-sidebar-link"
                 class="{{ request()->routeIs('dashboard') ? 'bg-indigo-50 text-indigo-700 ring-1 ring-indigo-100' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900' }} flex items-center rounded-lg px-3 py-2 text-sm font-medium transition">
                 {{ __('Dashboard') }}
             </a>
